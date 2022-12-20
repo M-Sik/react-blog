@@ -1,0 +1,40 @@
+@import '@/assets/scss/_variabled.scss';
+p {
+  margin: 0px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 8px;
+  height: 40px;
+  font-size: 16px;
+  padding-left: 8px;
+  &:focus {
+    outline: none;
+    border: 2px solid purple;
+  }
+  &::placeholder {
+    color: grey;
+    font-size: 12px;
+  }
+}
+
+.main-color {
+  color: $mainColor;
+}
+
+.main-btn {
+  height: 56px;
+  width: 100%;
+  background: white;
+  border: 1px solid blue;
+  border-radius: 12px;
+}
+
+.main-input {
+}
+
+.mt-3 {
+  margin-top: 12px;
+}
