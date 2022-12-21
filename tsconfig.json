@@ -24,6 +24,9 @@
   },
   "include": [
     "src",
-    "craco.config.js"
+    "craco.config.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/types/**/*.d.ts",
   ]
 }

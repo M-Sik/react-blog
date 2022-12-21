@@ -1,0 +1,24 @@
+@import '@/assets/scss/_variabled.scss';
+
+.wrap-navigation {
+  padding: 16px 10vw;
+  border-bottom: 1px solid grey;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  a {
+    color: #737373;
+    font-size: 24px;
+    padding-right: 24px;
+    font-weight: 700;
+    &:last-child {
+      padding: 0px;
+    }
+  }
+}
+.brand-color {
+  color: $main-color !important;
+}
+.active-color {
+  color: black !important;
+}
