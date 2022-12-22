@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import Dialog from '@mui/material/Dialog';
 import classNames from 'classnames/bind';
 import styles from '@/components/dialogs/ConfirmDialog.module.scss';
@@ -29,4 +29,4 @@ function ConfirmDialog({ dialog, dialogContent, dialogFunc }: ConfirmDialogProps
   );
 }
 
-export default ConfirmDialog;
+export default React.memo(ConfirmDialog);
