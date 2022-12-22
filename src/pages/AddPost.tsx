@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router';
 
 function AddPost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+
+  const navigate = useNavigate();
 
   const titleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputTitle = e.target.value;
@@ -18,8 +21,15 @@ function AddPost() {
   };
   const onSubmit = () => {
     console.log(title, body);
-    axios.post('http://localhost:3001/posts', { title: title, body: body });
+    axios.post('http://localhost:3001/posts', { title: title, body: body }).then((res) => {
+      if (res.status === 201) {
+        navigate('/blogs');
+      }
+    });
   };
+  const btnDisabled = useMemo(() => {
+    return title !== '' && body !== '' ? false : true;
+  }, [title, body]);
   return (
     <section className="main-layouts">
       <h1>Add Blog Post</h1>
@@ -44,7 +54,7 @@ function AddPost() {
           rows={20}
         ></textarea>
       </div>
-      <button disabled={true} className="mt-4 main-btn" onClick={onSubmit}>
+      <button disabled={btnDisabled} className="mt-4 main-btn" onClick={onSubmit}>
         Add
       </button>
     </section>
