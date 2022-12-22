@@ -2,12 +2,21 @@ import React from 'react';
 import axios from 'axios';
 import { ChangeEvent, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
+import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
+import useDidMountEffect from '@/hooks/useDidMountEffect';
 
 function AddPost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [dialog, setDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState('');
 
   const navigate = useNavigate();
+
+  // 커스텀 훅
+  useDidMountEffect(() => {
+    if (!dialog) navigate('/blogs');
+  }, [dialog]);
 
   const titleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputTitle = e.target.value;
@@ -21,11 +30,9 @@ function AddPost() {
   };
   const onSubmit = () => {
     console.log(title, body);
-    axios.post('http://localhost:3001/posts', { title: title, body: body }).then((res) => {
-      if (res.status === 201) {
-        navigate('/blogs');
-      }
-    });
+    setDialogContent('게시글 작성을 완료하였습니다.');
+    setDialog(true);
+    axios.post('http://localhost:3001/posts', { title: title, body: body });
   };
   const btnDisabled = useMemo(() => {
     return title !== '' && body !== '' ? false : true;
@@ -57,6 +64,7 @@ function AddPost() {
       <button disabled={btnDisabled} className="mt-4 main-btn" onClick={onSubmit}>
         Add
       </button>
+      <ConfirmDialog dialog={dialog} dialogContent={dialogContent} dialogFunc={setDialog} />
     </section>
   );
 }
