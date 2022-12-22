@@ -22,7 +22,7 @@ function AddPost() {
   };
   return (
     <section className="main-layouts">
-      <div className="fs-24 fw-700 mb-4">Add Blog Post</div>
+      <h1>Add Blog Post</h1>
       <div className="mb-4">
         <label>Title</label>
         <input
@@ -44,8 +44,8 @@ function AddPost() {
           rows={20}
         ></textarea>
       </div>
-      <button className="mt-4 main-btn" onClick={onSubmit}>
-        Post
+      <button disabled={true} className="mt-4 main-btn" onClick={onSubmit}>
+        Add
       </button>
     </section>
   );

@@ -56,9 +56,15 @@ a {
 .main-btn {
   height: 56px;
   width: 100%;
-  background: white;
-  border: 1px solid $main-color;
+  background: $main-color;
+  color: white;
+  border: none;
   border-radius: 12px;
+  font-size: 20px;
+  font-weight: 700;
+  &:disabled {
+    background: $grey-color-light;
+  }
 }
 
 .main-layouts {
