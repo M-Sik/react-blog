@@ -78,4 +78,4 @@ function AddPost() {
   );
 }
 
-export default React.memo(AddPost);
+export default AddPost;

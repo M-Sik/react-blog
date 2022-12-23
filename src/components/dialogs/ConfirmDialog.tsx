@@ -29,4 +29,4 @@ function ConfirmDialog({ dialog, dialogContent, dialogFunc }: ConfirmDialogProps
   );
 }
 
-export default React.memo(ConfirmDialog);
+export default ConfirmDialog;
