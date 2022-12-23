@@ -11,7 +11,7 @@ interface ConfirmDialogProps {
 }
 
 function ConfirmDialog({ dialog, dialogContent, dialogFunc }: ConfirmDialogProps) {
-  console.log('프롭스 보자', dialog);
+  // console.log('프롭스 보자', dialog);
   const handleClose = () => {
     dialogFunc(false);
   };

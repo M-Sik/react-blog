@@ -3,6 +3,10 @@ import React, { ChangeEvent, useState, useMemo, useCallback, useEffect } from 'r
 import { useNavigate } from 'react-router';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
+import CameraIcon from '@/components/icons/CameraIcon';
+import classNames from 'classnames/bind';
+import styles from '@/pages/AddPost.module.scss';
+const cx = classNames.bind(styles);
 
 function AddPost() {
   // const [title, setTitle] = useState('');
@@ -48,8 +52,8 @@ function AddPost() {
   }, [inputs]);
   return (
     <section className="main-layouts">
-      <h1>Add Blog Post</h1>
-      <div className="mb-4">
+      <h2>Add Blog Post</h2>
+      <article className="mb-4">
         <label>Title</label>
         <input
           placeholder="제목을 입력해주세요."
@@ -59,8 +63,8 @@ function AddPost() {
           value={inputs.title || ''}
           onChange={inputOnChange}
         />
-      </div>
-      <div>
+      </article>
+      <article>
         <label>Body</label>
         <textarea
           placeholder="내용을 입력해주세요."
@@ -69,8 +73,11 @@ function AddPost() {
           onChange={inputOnChange}
           rows={20}
         ></textarea>
-      </div>
-      <button disabled={btnDisabled} className="mt-4 main-btn" onClick={onSubmit}>
+      </article>
+      <article className={cx('wrap-camera')}>
+        <CameraIcon /> <p>사진 등록하기 (0 / 3)</p>
+      </article>
+      <button disabled={btnDisabled} className="mt-6 main-btn" onClick={onSubmit}>
         Add
       </button>
       <ConfirmDialog dialog={dialog} dialogContent={dialogContent} dialogFunc={setDialog} />

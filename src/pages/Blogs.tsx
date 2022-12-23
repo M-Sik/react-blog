@@ -18,10 +18,11 @@ function Blogs() {
 
   return (
     <div className="main-layouts">
-      <h1>Add Blog Post</h1>
+      <h2>Blogs</h2>
       {posts.map((post) => {
         return <div key={post.id}>{post.title}</div>;
       })}
+      <img src="blob:http://localhost:3000/560686e4-50ef-40ab-8de1-d0fb4b156b7e" alt="" />
     </div>
   );
 }
