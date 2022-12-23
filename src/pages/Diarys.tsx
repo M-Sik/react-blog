@@ -18,7 +18,6 @@ function Diarys() {
 
   return (
     <div className="main-layouts">
-      <h2>Diarys</h2>
       {posts.map((post) => {
         return <div key={post.id}>{post.title}</div>;
       })}

@@ -1,39 +1,16 @@
 {
   "posts": [
     {
-      "title": "hello",
-      "body": "body",
+      "title": "오늘의일기",
+      "body": "아주 좋아요\n정말루",
+      "createDate": "2022-12-23 17:57:27",
       "id": 1
     },
     {
-      "title": "ㅋㅋㅋㅋ",
-      "body": "ㅋㅋㅋㅋ",
+      "title": "크크크",
+      "body": "2131231",
+      "createDate": "2022-12-23 17:57:36",
       "id": 2
-    },
-    {
-      "title": "fafa",
-      "body": "faef",
-      "id": 3
-    },
-    {
-      "title": "얄랄루",
-      "body": "ㄹㄷㄹㅁㄹ",
-      "id": 4
-    },
-    {
-      "title": "faaa",
-      "body": "aaaa",
-      "id": 5
-    },
-    {
-      "title": "ffaef",
-      "body": "fffea",
-      "id": 6
-    },
-    {
-      "title": "321412",
-      "body": "faef",
-      "id": 7
     }
   ]
 }

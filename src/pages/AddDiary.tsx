@@ -1,12 +1,10 @@
 import axios from 'axios';
-import React, { ChangeEvent, useState, useMemo, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
-import CameraIcon from '@/components/icons/CameraIcon';
-import classNames from 'classnames/bind';
-import styles from '@/pages/AddPost.module.scss';
-const cx = classNames.bind(styles);
+import commonApi from '@/api/common/CommonApi';
+import { common } from '@mui/material/colors';
 
 function AddPost() {
   // const [title, setTitle] = useState('');
@@ -44,17 +42,23 @@ function AddPost() {
   const onSubmit = () => {
     console.log(inputs.title, inputs.body);
     setDialogContent('게시글 작성을 완료하였습니다.');
-    // setDialog(true);
-    // axios.post('http://localhost:3001/posts', { title: inputs.title, body: inputs.body });
+    const createDate = commonApi.dateFormat(new Date());
+    console.log('작성날짜 => ', createDate);
+
+    setDialog(true);
+    axios.post('http://localhost:3001/posts', {
+      title: inputs.title,
+      body: inputs.body,
+      createDate: createDate,
+    });
   };
   const btnDisabled = useMemo(() => {
     return inputs.title !== '' && inputs.body !== '' ? false : true;
   }, [inputs]);
   return (
     <section className="main-layouts">
-      <h2>Add Blog Post</h2>
       <article className="mb-4">
-        <label>Title</label>
+        <label>제목</label>
         <input
           placeholder="제목을 입력해주세요."
           className="main-input"
@@ -65,7 +69,7 @@ function AddPost() {
         />
       </article>
       <article>
-        <label>Body</label>
+        <label>내용</label>
         <textarea
           placeholder="내용을 입력해주세요."
           name="body"
@@ -73,9 +77,6 @@ function AddPost() {
           onChange={inputOnChange}
           rows={20}
         ></textarea>
-      </article>
-      <article className={cx('wrap-camera')}>
-        <CameraIcon /> <p>사진 등록하기 (0 / 3)</p>
       </article>
       <button disabled={btnDisabled} className="mt-6 main-btn" onClick={onSubmit}>
         Add
