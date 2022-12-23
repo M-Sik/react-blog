@@ -14,12 +14,12 @@ function Navigation() {
           </Link>
         </div>
         <div>
-          <NavLink className={({ isActive }) => (isActive ? cx('active-color') : '')} to="/blogs">
-            Blogs
+          <NavLink className={({ isActive }) => (isActive ? cx('active-color') : '')} to="/diarys">
+            Diarys
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? cx('active-color') : '')}
-            to="/add-post"
+            to="/add-diary"
           >
             AddPost
           </NavLink>

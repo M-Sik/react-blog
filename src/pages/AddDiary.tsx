@@ -21,7 +21,7 @@ function AddPost() {
   const navigate = useNavigate();
   // 커스텀 훅
   useDidMountEffect(() => {
-    if (!dialog) navigate('/blogs');
+    if (!dialog) navigate('/diarys');
   }, [dialog]);
 
   const inputOnChange = (e: any) => {

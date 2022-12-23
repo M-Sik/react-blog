@@ -2,7 +2,7 @@ import { BlogList } from '@/types/Interface';
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 
-function Blogs() {
+function Diarys() {
   const [posts, setPosts] = useState([] as BlogList[]);
 
   const getPosts = () => {
@@ -18,7 +18,7 @@ function Blogs() {
 
   return (
     <div className="main-layouts">
-      <h2>Blogs</h2>
+      <h2>Diarys</h2>
       {posts.map((post) => {
         return <div key={post.id}>{post.title}</div>;
       })}
@@ -26,4 +26,4 @@ function Blogs() {
   );
 }
 
-export default Blogs;
+export default Diarys;

@@ -1,7 +1,7 @@
 import Home from '@/pages/Home';
-import AddPost from '@/pages/AddPost';
+import AddDiary from '@/pages/AddDiary';
 import MainLayout from '@/layouts/MainLayout';
-import Blogs from '@/pages/Blogs';
+import Diarys from '@/pages/Diarys';
 import { useRoutes } from 'react-router-dom';
 
 function Router() {
@@ -14,12 +14,12 @@ function Router() {
           element: <Home />,
         },
         {
-          path: '/blogs',
-          element: <Blogs />,
+          path: '/diarys',
+          element: <Diarys />,
         },
         {
-          path: '/add-post',
-          element: <AddPost />,
+          path: '/add-diary',
+          element: <AddDiary />,
         },
       ],
     },
