@@ -23,10 +23,6 @@ function Diarys() {
 
   return (
     <div className="main-layouts">
-      {/* {diarys.map((diary) => {
-        return <div key={diary.id}>{diary.title}</div>;
-      })} */}
-      {/* <DiaryCard diary={ }/> */}
       {diarys
         .map((diary) => {
           return <DiaryCard key={diary.createDate} diary={diary} />;
