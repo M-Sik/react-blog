@@ -21,7 +21,7 @@ function Navigation() {
             className={({ isActive }) => (isActive ? cx('active-color') : '')}
             to="/add-diary"
           >
-            AddPost
+            AddDiary
           </NavLink>
         </div>
       </nav>

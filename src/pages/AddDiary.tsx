@@ -6,7 +6,7 @@ import useDidMountEffect from '@/hooks/useDidMountEffect';
 import commonApi from '@/api/common/CommonApi';
 import { common } from '@mui/material/colors';
 
-function AddPost() {
+function AddDiary() {
   // const [title, setTitle] = useState('');
   // const [body, setBody] = useState('');
   const [inputs, setInputs] = useState({
@@ -86,4 +86,4 @@ function AddPost() {
   );
 }
 
-export default AddPost;
+export default AddDiary;
