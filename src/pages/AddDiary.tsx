@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
 import commonApi from '@/api/common/CommonApi';
-import { common } from '@mui/material/colors';
+import { diaryStore } from '@/store/DiaryStore';
 
 function AddDiary() {
   // const [title, setTitle] = useState('');
@@ -15,6 +15,8 @@ function AddDiary() {
   });
   const [dialog, setDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState('');
+  // zustand
+  const { addDiary } = diaryStore();
 
   const navigate = useNavigate();
   // 커스텀 훅
@@ -46,11 +48,7 @@ function AddDiary() {
     console.log('작성날짜 => ', createDate);
 
     setDialog(true);
-    axios.post('http://localhost:3001/posts', {
-      title: inputs.title,
-      body: inputs.body,
-      createDate: createDate,
-    });
+    addDiary({ title: inputs.title, body: inputs.body, createDate: createDate });
   };
   const btnDisabled = useMemo(() => {
     return inputs.title !== '' && inputs.body !== '' ? false : true;
