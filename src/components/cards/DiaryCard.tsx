@@ -5,14 +5,25 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Diary } from '@/types/Interface';
 const cx = classNames.bind(styles);
 
-function DiaryCard({ diary }: { diary: Diary }) {
+interface DiaryCardProps {
+  diary: Diary;
+  openDetail: (index: number) => void;
+  index: number;
+}
+
+function DiaryCard({ diary, openDetail, index }: DiaryCardProps) {
+  const handleClick = () => {
+    openDetail(index);
+  };
   return (
     <section className={cx('wrap-card')}>
       <article className={cx('wrap-title')}>
         <p>
           {diary.title} <span>{diary.createDate}</span>
         </p>
-        <ChevronRightIcon />
+        <div onClick={handleClick}>
+          <ChevronRightIcon />
+        </div>
       </article>
       <div className="h1-divider mt-4 mb-4"></div>
       <article className={cx('wrap-content')}>{diary.body}</article>
