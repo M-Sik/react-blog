@@ -5,7 +5,6 @@ import { diaryStore } from '@/store/DiaryStore';
 import DiaryDetailDialog from '@/components/dialogs/DiaryDetailDialog';
 
 function Diarys() {
-  //
   const [diarys, setDiarys] = useState<Diary[]>([]);
   const [openDiaryInfo, setOpenDiaryInfo] = useState<Diary>({
     body: '',
