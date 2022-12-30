@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from '@/components/navigations/Navigation.module.scss';
+import LogoIcon from '../icons/LogoIcon';
 const cx = classNames.bind(styles);
 
 function Navigation() {
@@ -10,7 +11,7 @@ function Navigation() {
       <nav className={cx('wrap-navigation')}>
         <div>
           <Link className={cx('brand-color')} to="/">
-            Home
+            <LogoIcon />
           </Link>
         </div>
         <div>
