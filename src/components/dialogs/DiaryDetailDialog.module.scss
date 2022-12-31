@@ -9,16 +9,30 @@
   }
   .wrap-card {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    width: 400px;
+    padding: 40px;
+    width: 40vw;
+    min-width: 400px;
+    .wrap-close-icon {
+      text-align: end;
+    }
+    .wrap-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        color: $grey-color;
+      }
+    }
+    .wrap-content {
+      white-space: pre-line;
+    }
+    .wrap-btn {
+      margin-top: 60px;
+      text-align: end;
+    }
     button {
       border: unset;
       background: white;
-      position: absolute;
-      bottom: 20px;
       color: $main-color;
       font-size: 16px;
     }

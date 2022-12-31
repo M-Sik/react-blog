@@ -16,14 +16,12 @@ function DiaryCard({ diary, openDetail, index }: DiaryCardProps) {
     openDetail(index);
   };
   return (
-    <section className={cx('wrap-card')}>
+    <section onClick={handleClick} className={cx('wrap-card')}>
       <article className={cx('wrap-title')}>
         <p>
           {diary.title} <span>{diary.createDate}</span>
         </p>
-        <div onClick={handleClick}>
-          <ChevronRightIcon />
-        </div>
+        <ChevronRightIcon />
       </article>
       <div className="h1-divider mt-4 mb-4"></div>
       <article className={cx('wrap-content')}>{diary.body}</article>

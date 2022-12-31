@@ -6,6 +6,7 @@ import { mountStoreDevtool } from 'simple-zustand-devtools';
 interface DiaryStoreInfo {
   storeDiarys: Diary[];
   addDiary: (diary: Diary) => void;
+  deleteDiary: (createDate: string) => void;
 }
 // 미들웨어 persist 를 사용하기위한 타입
 type MyPersist = (
@@ -19,6 +20,16 @@ export const diaryStore = create<DiaryStoreInfo>(
       storeDiarys: [],
       addDiary: (diary) => {
         set((state) => ({ storeDiarys: [...state.storeDiarys, diary] }));
+      },
+      deleteDiary: (createDate) => {
+        set((state) => ({
+          storeDiarys: [
+            ...state.storeDiarys.filter((diary) => {
+              return diary.createDate !== createDate;
+            }),
+          ],
+        }));
+        // console.log(storeDiar);
       },
     }),
     { name: 'diary' },
