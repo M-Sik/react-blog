@@ -5,7 +5,7 @@ import { diaryStore } from '@/store/DiaryStore';
 import DiaryDetailDialog from '@/components/dialogs/DiaryDetailDialog';
 
 function Diarys() {
-  const [diarys, setDiarys] = useState<Diary[]>([]);
+  // const [diarys, setDiarys] = useState<Diary[]>([]);
   const [openDiaryInfo, setOpenDiaryInfo] = useState<Diary>({
     body: '',
     title: '',
@@ -16,13 +16,13 @@ function Diarys() {
   const { storeDiarys } = diaryStore();
 
   const getDiary = () => {
-    setDiarys(storeDiarys);
+    // setDiarys(storeDiarys);
     console.log('다이어리 조회 결과 => ', storeDiarys);
   };
   const diaryDetail = (index: number) => {
     console.log('n 번째 리스트 클릭 => ', index);
-    console.log(diarys[index]);
-    setOpenDiaryInfo(diarys[index]);
+    console.log(storeDiarys[index]);
+    setOpenDiaryInfo(storeDiarys[index]);
     setDiaryDialog(true);
   };
   // useEffect 의 뒤에 빈배열 []을 넣어놓으면 한번만 실행된다.
@@ -32,7 +32,7 @@ function Diarys() {
 
   return (
     <div className="main-layouts">
-      {diarys
+      {storeDiarys
         .map((diary, index) => {
           return (
             <DiaryCard
