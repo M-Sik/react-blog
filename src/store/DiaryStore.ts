@@ -23,13 +23,8 @@ export const diaryStore = create<DiaryStoreInfo>(
       },
       deleteDiary: (createDate) => {
         set((state) => ({
-          storeDiarys: [
-            ...state.storeDiarys.filter((diary) => {
-              return diary.createDate !== createDate;
-            }),
-          ],
+          storeDiarys: state.storeDiarys.filter((diary) => diary.createDate !== createDate),
         }));
-        // console.log(storeDiar);
       },
     }),
     { name: 'diary' },
