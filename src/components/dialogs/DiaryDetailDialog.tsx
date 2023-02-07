@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import classNames from 'classnames/bind';
 import styles from '@/components/dialogs/DiaryDetailDialog.module.scss';
-import { Diary } from '@/types/Interface';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteDialog from '@/components/dialogs/CancelAndConfirmDialog';
 import { diaryStore } from '@/store/DiaryStore';
@@ -10,27 +9,76 @@ const cx = classNames.bind(styles);
 
 interface ConfirmDialogProps {
   dialog: boolean;
-  diary: Diary;
   dialogFunc: Dispatch<SetStateAction<boolean>>;
+  diaryIndex: number;
+  initDiaryIndex: Dispatch<SetStateAction<number>>;
 }
 
-function diaryDetailDialog({ dialog, diary, dialogFunc }: ConfirmDialogProps) {
-  const [deleteDialog, setDeleteDialog] = useState(false);
+function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: ConfirmDialogProps) {
+  const useInputs = () => {
+    const [inputsToggle, setInputsToggle] = useState(false);
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const handleTitle = (e: any) => {
+      setTitle(e.target.value);
+    };
+    const handleBody = (e: any) => {
+      setBody(e.target.value);
+    };
+    return {
+      inputsToggle,
+      setInputsToggle,
+      title,
+      setTitle,
+      body,
+      setBody,
+      handleTitle,
+      handleBody,
+    };
+  };
 
-  // zustand
-  const { deleteDiary } = diaryStore();
+  const useDiary = () => {
+    // zustand
+    const { storeDiarys } = diaryStore();
+    const { deleteDiary } = diaryStore();
+    const handleUpdateDiary = () => {
+      console.log(' diary index => ', diaryIndex);
+      setInputsToggle(true);
+      setTitle(storeDiarys[diaryIndex].title);
+      setBody(storeDiarys[diaryIndex].body);
+    };
+    const handleCompleteDiary = () => {
+      setInputsToggle(false);
+    };
+    const handleDelete = () => {
+      setInputsToggle(false);
+      setDeleteDialog(false);
+      deleteDiary(storeDiarys[diaryIndex].createDate);
+      // console.log(storeDiarys[diaryIndex].createDate);
+      initDiaryIndex(0);
+      dialogFunc(false);
+    };
+    return { storeDiarys, deleteDiary, handleUpdateDiary, handleCompleteDiary, handleDelete };
+  };
+  const useDialog = () => {
+    const [deleteDialog, setDeleteDialog] = useState(false);
 
-  const handleClose = () => {
-    dialogFunc(false);
+    const handleClose = () => {
+      setInputsToggle(false);
+      dialogFunc(false);
+    };
+    const ondeletePopUp = () => {
+      setDeleteDialog(true);
+    };
+
+    return { deleteDialog, setDeleteDialog, handleClose, ondeletePopUp, handleDelete };
   };
-  const ondeletePopUp = () => {
-    setDeleteDialog(true);
-  };
-  const handleDelete = () => {
-    setDeleteDialog(false);
-    deleteDiary(diary.createDate);
-    dialogFunc(false);
-  };
+  const { inputsToggle, setInputsToggle, title, setTitle, body, setBody, handleTitle, handleBody } =
+    useInputs();
+  const { storeDiarys, deleteDiary, handleUpdateDiary, handleCompleteDiary, handleDelete } =
+    useDiary();
+  const { deleteDialog, setDeleteDialog, handleClose, ondeletePopUp } = useDialog();
+
   return (
     <div>
       <Dialog open={dialog} onClose={handleClose} className={cx('wrap-dialog')}>
@@ -39,17 +87,42 @@ function diaryDetailDialog({ dialog, diary, dialogFunc }: ConfirmDialogProps) {
             <CloseIcon />
           </div>
           <div className={`${cx('wrap-title')}`}>
-            <h2>
-              제목 : <span>{diary.title}</span>
+            <h2 className="d-flex">
+              제목 :
+              <span className="ml-3">
+                {inputsToggle ? (
+                  <input type="text" value={title} onChange={handleTitle} />
+                ) : (
+                  storeDiarys[diaryIndex].title
+                )}
+              </span>
             </h2>
-            <p>{diary.createDate}</p>
+            <p>{storeDiarys[diaryIndex].createDate}</p>
           </div>
           <div className="h1-divider"></div>
-          <p className={`${cx('wrap-content')} mt-4 mb-4`}>{diary.body}</p>
+          {inputsToggle ? (
+            <textarea
+              className="mt-4"
+              placeholder="내용을 입력해주세요."
+              name="body"
+              value={body}
+              onChange={handleBody}
+              rows={20}
+            ></textarea>
+          ) : (
+            <p className={`${cx('wrap-content')} mt-4 mb-4`}>{storeDiarys[diaryIndex].body}</p>
+          )}
           <div className={cx('wrap-btn')}>
-            <button onClick={handleClose} type="button">
-              수정하기
-            </button>
+            {inputsToggle ? (
+              <button onClick={handleCompleteDiary} type="button">
+                완료하기
+              </button>
+            ) : (
+              <button onClick={handleUpdateDiary} type="button">
+                수정하기
+              </button>
+            )}
+
             <button onClick={ondeletePopUp} type="button">
               삭제하기
             </button>

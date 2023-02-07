@@ -1,16 +1,11 @@
 import DiaryCard from '@/components/cards/DiaryCard';
-import { Diary } from '@/types/Interface';
 import React, { useEffect, useState } from 'react';
 import { diaryStore } from '@/store/DiaryStore';
 import DiaryDetailDialog from '@/components/dialogs/DiaryDetailDialog';
 
 function Diarys() {
   // const [diarys, setDiarys] = useState<Diary[]>([]);
-  const [openDiaryInfo, setOpenDiaryInfo] = useState<Diary>({
-    body: '',
-    title: '',
-    createDate: '',
-  });
+  const [openDiaryIndex, setOpenDiaryIndex] = useState(0);
   const [diaryDialog, setDiaryDialog] = useState(false);
   // zustand hook
   const { storeDiarys } = diaryStore();
@@ -20,9 +15,7 @@ function Diarys() {
     console.log('다이어리 조회 결과 => ', storeDiarys);
   };
   const diaryDetail = (index: number) => {
-    console.log('n 번째 리스트 클릭 => ', index);
-    console.log(storeDiarys[index]);
-    setOpenDiaryInfo(storeDiarys[index]);
+    setOpenDiaryIndex(index);
     setDiaryDialog(true);
   };
   // useEffect 의 뒤에 빈배열 []을 넣어놓으면 한번만 실행된다.
@@ -44,7 +37,12 @@ function Diarys() {
           );
         })
         .reverse()}
-      <DiaryDetailDialog diary={openDiaryInfo} dialog={diaryDialog} dialogFunc={setDiaryDialog} />
+      <DiaryDetailDialog
+        diaryIndex={openDiaryIndex}
+        dialog={diaryDialog}
+        dialogFunc={setDiaryDialog}
+        initDiaryIndex={setOpenDiaryIndex}
+      />
     </div>
   );
 }

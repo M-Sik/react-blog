@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { ChangeEvent, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
@@ -59,7 +58,6 @@ function AddDiary() {
         <label>제목</label>
         <input
           placeholder="제목을 입력해주세요."
-          className="main-input"
           name="title"
           type="text"
           value={inputs.title || ''}
