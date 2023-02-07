@@ -6,52 +6,54 @@ import commonApi from '@/api/common/CommonApi';
 import { diaryStore } from '@/store/DiaryStore';
 
 function AddDiary() {
-  // const [title, setTitle] = useState('');
-  // const [body, setBody] = useState('');
-  const [inputs, setInputs] = useState({
-    title: '',
-    body: '',
-  });
-  const [dialog, setDialog] = useState(false);
-  const [dialogContent, setDialogContent] = useState('');
-  // zustand
-  const { addDiary } = diaryStore();
-
-  const navigate = useNavigate();
-  // 커스텀 훅
-  useDidMountEffect(() => {
-    if (!dialog) navigate('/diarys');
-  }, [dialog]);
-
-  const inputOnChange = (e: any) => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
+  const useInputs = () => {
+    const [inputs, setInputs] = useState({
+      title: '',
+      body: '',
     });
+    const inputOnChange = (e: any) => {
+      const { name, value } = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    };
+    return { inputs, setInputs, inputOnChange };
   };
-  // const titleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const inputTitle = e.target.value;
-  //   setTitle(inputTitle);
-  //   console.log(inputTitle);
-  // };
-  // const bodyInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   const inputBody = e.target.value;
-  //   setBody(inputBody);
-  //   console.log(inputBody);
-  // };
-  const onSubmit = () => {
-    console.log(inputs.title, inputs.body);
-    setDialogContent('게시글 작성을 완료하였습니다.');
-    const createDate = commonApi.dateFormat(new Date());
-    console.log('작성날짜 => ', createDate);
 
-    setDialog(true);
-    addDiary({ title: inputs.title, body: inputs.body, createDate: createDate });
+  const useDiary = () => {
+    // zustand
+    const { addDiary } = diaryStore();
+    const onSubmit = () => {
+      console.log(inputs.title, inputs.body);
+      setDialogContent('게시글 작성을 완료하였습니다.');
+      const createDate = commonApi.dateFormat(new Date());
+      console.log('작성날짜 => ', createDate);
+
+      setDialog(true);
+      addDiary({ title: inputs.title, body: inputs.body, createDate: createDate });
+    };
+    const btnDisabled = useMemo(() => {
+      return inputs.title !== '' && inputs.body !== '' ? false : true;
+    }, [inputs]);
+    return { addDiary, onSubmit, btnDisabled };
   };
-  const btnDisabled = useMemo(() => {
-    return inputs.title !== '' && inputs.body !== '' ? false : true;
-  }, [inputs]);
+
+  const useDialog = () => {
+    const [dialog, setDialog] = useState(false);
+    const [dialogContent, setDialogContent] = useState('');
+    // 커스텀 훅
+    useDidMountEffect(() => {
+      if (!dialog) navigate('/diarys');
+    }, [dialog]);
+    return { dialog, setDialog, dialogContent, setDialogContent };
+  };
+
+  const { inputs, inputOnChange } = useInputs();
+  const { onSubmit, btnDisabled } = useDiary();
+  const { dialog, setDialog, dialogContent, setDialogContent } = useDialog();
+  const navigate = useNavigate();
+
   return (
     <section className="main-layouts">
       <article className="mb-4">
@@ -75,7 +77,7 @@ function AddDiary() {
         ></textarea>
       </article>
       <button disabled={btnDisabled} className="mt-6 main-btn" onClick={onSubmit}>
-        Add
+        작성완료!
       </button>
       <ConfirmDialog dialog={dialog} dialogContent={dialogContent} dialogFunc={setDialog} />
     </section>

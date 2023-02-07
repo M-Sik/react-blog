@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import classNames from 'classnames/bind';
 import styles from '@/components/dialogs/DiaryDetailDialog.module.scss';
@@ -19,10 +19,10 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
     const [inputsToggle, setInputsToggle] = useState(false);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const handleTitle = (e: any) => {
+    const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
       setTitle(e.target.value);
     };
-    const handleBody = (e: any) => {
+    const handleBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
       setBody(e.target.value);
     };
     return {
