@@ -1,27 +1,27 @@
 import DiaryCard from '@/components/cards/DiaryCard';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { diaryStore } from '@/store/DiaryStore';
 import DiaryDetailDialog from '@/components/dialogs/DiaryDetailDialog';
 
 function Diarys() {
-  // const [diarys, setDiarys] = useState<Diary[]>([]);
-  const [openDiaryIndex, setOpenDiaryIndex] = useState(0);
-  const [diaryDialog, setDiaryDialog] = useState(false);
-  // zustand hook
-  const { storeDiarys } = diaryStore();
+  const useDiary = () => {
+    const [openDiaryIndex, setOpenDiaryIndex] = useState(null as null | number);
+    // zustand hook
+    const { storeDiarys } = diaryStore();
+    return { openDiaryIndex, setOpenDiaryIndex, storeDiarys };
+  };
 
-  const getDiary = () => {
-    // setDiarys(storeDiarys);
-    console.log('다이어리 조회 결과 => ', storeDiarys);
+  const useDialog = () => {
+    const [diaryDialog, setDiaryDialog] = useState(false);
+    const openDiaryDialog = (index: number) => {
+      setOpenDiaryIndex(index);
+      setDiaryDialog(true);
+    };
+    return { diaryDialog, setDiaryDialog, openDiaryDialog };
   };
-  const diaryDetail = (index: number) => {
-    setOpenDiaryIndex(index);
-    setDiaryDialog(true);
-  };
-  // useEffect 의 뒤에 빈배열 []을 넣어놓으면 한번만 실행된다.
-  useEffect(() => {
-    getDiary();
-  }, []);
+
+  const { openDiaryIndex, setOpenDiaryIndex, storeDiarys } = useDiary();
+  const { diaryDialog, setDiaryDialog, openDiaryDialog } = useDialog();
 
   return (
     <div className="main-layouts">
@@ -29,7 +29,7 @@ function Diarys() {
         .map((diary, index) => {
           return (
             <DiaryCard
-              openDetail={diaryDetail}
+              openDetail={openDiaryDialog}
               key={diary.createDate}
               diary={diary}
               index={index}

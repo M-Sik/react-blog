@@ -10,8 +10,8 @@ const cx = classNames.bind(styles);
 interface ConfirmDialogProps {
   dialog: boolean;
   dialogFunc: Dispatch<SetStateAction<boolean>>;
-  diaryIndex: number;
-  initDiaryIndex: Dispatch<SetStateAction<number>>;
+  diaryIndex: number | null;
+  initDiaryIndex: Dispatch<SetStateAction<number | null>>;
 }
 
 function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: ConfirmDialogProps) {
@@ -44,8 +44,10 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
     const handleUpdateDiary = () => {
       console.log(' diary index => ', diaryIndex);
       setInputsToggle(true);
-      setTitle(storeDiarys[diaryIndex].title);
-      setBody(storeDiarys[diaryIndex].body);
+      if (diaryIndex !== null) {
+        setTitle(storeDiarys[diaryIndex].title);
+        setBody(storeDiarys[diaryIndex].body);
+      }
     };
     const handleCompleteDiary = () => {
       setInputsToggle(false);
@@ -53,9 +55,10 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
     const handleDelete = () => {
       setInputsToggle(false);
       setDeleteDialog(false);
-      deleteDiary(storeDiarys[diaryIndex].createDate);
-      // console.log(storeDiarys[diaryIndex].createDate);
-      initDiaryIndex(0);
+      if (diaryIndex !== null) {
+        deleteDiary(storeDiarys[diaryIndex].createDate);
+      }
+      initDiaryIndex(null);
       dialogFunc(false);
     };
     return { storeDiarys, deleteDiary, handleUpdateDiary, handleCompleteDiary, handleDelete };
@@ -93,11 +96,11 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
                 {inputsToggle ? (
                   <input type="text" value={title} onChange={handleTitle} />
                 ) : (
-                  storeDiarys[diaryIndex].title
+                  diaryIndex !== null && storeDiarys[diaryIndex].title
                 )}
               </span>
             </h2>
-            <p>{storeDiarys[diaryIndex].createDate}</p>
+            {diaryIndex !== null && <p>{storeDiarys[diaryIndex].createDate}</p>}
           </div>
           <div className="h1-divider"></div>
           {inputsToggle ? (
@@ -110,7 +113,9 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
               rows={20}
             ></textarea>
           ) : (
-            <p className={`${cx('wrap-content')} mt-4 mb-4`}>{storeDiarys[diaryIndex].body}</p>
+            <p className={`${cx('wrap-content')} mt-4 mb-4`}>
+              {diaryIndex !== null && storeDiarys[diaryIndex].body}
+            </p>
           )}
           <div className={cx('wrap-btn')}>
             {inputsToggle ? (
