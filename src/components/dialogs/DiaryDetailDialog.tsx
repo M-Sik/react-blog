@@ -41,6 +41,7 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
     // zustand
     const { storeDiarys } = diaryStore();
     const { deleteDiary } = diaryStore();
+    const { updateDiary } = diaryStore();
     const handleUpdateDiary = () => {
       console.log(' diary index => ', diaryIndex);
       setInputsToggle(true);
@@ -51,6 +52,8 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
     };
     const handleCompleteDiary = () => {
       setInputsToggle(false);
+      console.log(title, body);
+      updateDiary(diaryIndex as number, title, body);
     };
     const handleDelete = () => {
       setInputsToggle(false);
@@ -61,7 +64,14 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
       initDiaryIndex(null);
       dialogFunc(false);
     };
-    return { storeDiarys, deleteDiary, handleUpdateDiary, handleCompleteDiary, handleDelete };
+    return {
+      storeDiarys,
+      deleteDiary,
+      updateDiary,
+      handleUpdateDiary,
+      handleCompleteDiary,
+      handleDelete,
+    };
   };
   const useDialog = () => {
     const [deleteDialog, setDeleteDialog] = useState(false);
