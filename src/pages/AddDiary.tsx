@@ -55,7 +55,7 @@ function AddDiary() {
   const navigate = useNavigate();
 
   return (
-    <section className="main-layouts">
+    <section className="main-layouts mt-6">
       <article className="mb-4">
         <label>제목</label>
         <input

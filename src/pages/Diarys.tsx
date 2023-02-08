@@ -24,7 +24,7 @@ function Diarys() {
   const { diaryDialog, setDiaryDialog, openDiaryDialog } = useDialog();
 
   return (
-    <div className="main-layouts">
+    <div className="main-layouts mt-6">
       {storeDiarys
         .map((diary, index) => {
           return (
