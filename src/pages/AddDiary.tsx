@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog';
 import useDidMountEffect from '@/hooks/useDidMountEffect';
@@ -7,35 +7,31 @@ import { diaryStore } from '@/store/DiaryStore';
 
 function AddDiary() {
   const useInputs = () => {
-    const [inputs, setInputs] = useState({
-      title: '',
-      body: '',
-    });
-    const inputOnChange = (e: any) => {
-      const { name, value } = e.target;
-      setInputs({
-        ...inputs,
-        [name]: value,
-      });
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const handleTitle = (e: ChangeEvent<HTMLInputElement>) => {
+      setTitle(e.target.value);
     };
-    return { inputs, setInputs, inputOnChange };
+    const handleBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      setBody(e.target.value);
+    };
+    return { title, setTitle, handleTitle, body, setBody, handleBody };
   };
 
   const useDiary = () => {
     // zustand
     const { addDiary } = diaryStore();
     const onSubmit = () => {
-      console.log(inputs.title, inputs.body);
       setDialogContent('게시글 작성을 완료하였습니다.');
       const createDate = commonApi.dateFormat(new Date());
       console.log('작성날짜 => ', createDate);
 
       setDialog(true);
-      addDiary({ title: inputs.title, body: inputs.body, createDate: createDate });
+      addDiary({ title: title, body: body, createDate: createDate });
     };
     const btnDisabled = useMemo(() => {
-      return inputs.title !== '' && inputs.body !== '' ? false : true;
-    }, [inputs]);
+      return title !== '' && body !== '' ? false : true;
+    }, [title, body]);
     return { addDiary, onSubmit, btnDisabled };
   };
 
@@ -49,7 +45,7 @@ function AddDiary() {
     return { dialog, setDialog, dialogContent, setDialogContent };
   };
 
-  const { inputs, inputOnChange } = useInputs();
+  const { title, handleTitle, body, handleBody } = useInputs();
   const { onSubmit, btnDisabled } = useDiary();
   const { dialog, setDialog, dialogContent, setDialogContent } = useDialog();
   const navigate = useNavigate();
@@ -62,8 +58,8 @@ function AddDiary() {
           placeholder="제목을 입력해주세요."
           name="title"
           type="text"
-          value={inputs.title || ''}
-          onChange={inputOnChange}
+          value={title}
+          onChange={handleTitle}
         />
       </article>
       <article>
@@ -71,8 +67,8 @@ function AddDiary() {
         <textarea
           placeholder="내용을 입력해주세요."
           name="body"
-          value={inputs.body}
-          onChange={inputOnChange}
+          value={body}
+          onChange={handleBody}
           rows={20}
         ></textarea>
       </article>

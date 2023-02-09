@@ -88,8 +88,7 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
   };
   const { inputsToggle, setInputsToggle, title, setTitle, body, setBody, handleTitle, handleBody } =
     useInputs();
-  const { storeDiarys, deleteDiary, handleUpdateDiary, handleCompleteDiary, handleDelete } =
-    useDiary();
+  const { storeDiarys, handleUpdateDiary, handleCompleteDiary, handleDelete } = useDiary();
   const { deleteDialog, setDeleteDialog, handleClose, ondeletePopUp } = useDialog();
 
   return (
