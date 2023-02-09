@@ -21,15 +21,16 @@
         rgba(248, 246, 248, 0.2)
       ), url("../../src/assets/imgs/homeBackground.jpg");
     background-size: cover;
+    p {
+      animation: typing, cursor 1s steps(1) infinite;
+      border-right: .05em solid $main-color;
+      font-size: 40px;
+      font-weight: 700;
+      color: $main-color;
+      white-space: nowrap;
+      text-align: center;
+  }
 }
 
-p {
-    animation: typing, cursor 1s steps(1) infinite;
-    border-right: .05em solid $main-color;
-    font-size: 40px;
-    font-weight: 700;
-    color: $main-color;
-    white-space: nowrap;
-    text-align: center;
-}
+
 
