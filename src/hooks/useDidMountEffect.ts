@@ -3,7 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const useDidMountEffect = (func: any, deps: any) => {
+const useDidMountEffect = (func: () => void, deps: React.DependencyList | undefined) => {
   const didMount = useRef(false);
 
   useEffect(() => {
