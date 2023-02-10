@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '@/pages/Home.module.scss';
 import classNames from 'classnames/bind';
+import { Mobile, Pc } from '@/components/etc/MobileOrPc';
 const cx = classNames.bind(styles);
 
 function Home() {
@@ -27,9 +28,16 @@ function Home() {
   });
 
   return (
-    <div className={`${cx('home-container')}`}>
-      <p>{blogTitle}</p>
-    </div>
+    <>
+      <Mobile>
+        <div>feafa</div>
+      </Mobile>
+      <Pc>
+        <div className={`${cx('home-container')}`}>
+          <p>{blogTitle}</p>
+        </div>
+      </Pc>
+    </>
   );
 }
 
