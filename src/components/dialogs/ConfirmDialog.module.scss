@@ -1,26 +1,46 @@
 @import '@/assets/scss/_variabled.scss';
 
-.wrap-dialog {
-  box-shadow: unset !important;
-  div {
-    &:nth-child(1) {
-      // background-color: unset !important;
-    }
-  }
-  .wrap-card {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    width: 400px;
-    button {
-      border: unset;
-      background: white;
-      position: absolute;
-      bottom: 20px;
-      color: $main-color;
-      font-size: 16px;
+
+@media (max-width: 799px) {
+  .wrap-dialog {
+    box-shadow: unset !important;
+    .wrap-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      width: 80vw;
+      button {
+        border: unset;
+        background: white;
+        position: absolute;
+        bottom: 20px;
+        color: $main-color;
+        font-size: 16px;
+      }
     }
   }
 }
+@media (min-width: 800px) {
+  .wrap-dialog {
+    box-shadow: unset !important;
+    .wrap-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      width: 400px;
+      button {
+        border: unset;
+        background: white;
+        position: absolute;
+        bottom: 20px;
+        color: $main-color;
+        font-size: 16px;
+      }
+    }
+  }
+}
+

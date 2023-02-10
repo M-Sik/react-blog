@@ -98,18 +98,18 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
           <div onClick={handleClose} className={cx('wrap-close-icon')}>
             <CloseIcon />
           </div>
-          <div className={`${cx('wrap-title')}`}>
-            <h2 className="d-flex">
-              제목 :
-              <span className="ml-3">
-                {inputsToggle ? (
-                  <input type="text" value={title} onChange={handleTitle} />
-                ) : (
-                  diaryIndex !== null && storeDiarys[diaryIndex].title
-                )}
-              </span>
-            </h2>
+          <div className="grey-color fs-12">
             {diaryIndex !== null && <p>{storeDiarys[diaryIndex].createDate}</p>}
+          </div>
+          <div className={`${cx('wrap-title')}`}>
+            <h2 className="d-flex">제목 :</h2>
+            <div>
+              {inputsToggle ? (
+                <input type="text" value={title} onChange={handleTitle} />
+              ) : (
+                <h2>{diaryIndex !== null && storeDiarys[diaryIndex].title}</h2>
+              )}
+            </div>
           </div>
           <div className="h1-divider"></div>
           {inputsToggle ? (

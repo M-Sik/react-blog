@@ -1,41 +1,82 @@
 @import '@/assets/scss/_variabled.scss';
 
-.wrap-dialog {
-  box-shadow: unset !important;
-  div {
-    &:nth-child(1) {
-      // background-color: unset !important;
-    }
-  }
-  .wrap-card {
-    position: relative;
-    padding: 40px;
-    width: 40vw;
-    max-width: 600px;
-    min-width: 400px;
-    .wrap-close-icon {
-      text-align: end;
-    }
-    .wrap-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      p {
-        color: $grey-color;
+
+@media (max-width: 799px) {
+  .wrap-dialog {
+    box-shadow: unset !important;
+    .wrap-card {
+      position: relative;
+      padding: 16px;
+      width: 80vw;
+      .wrap-close-icon {
+        text-align: end;
+      }
+      .wrap-title {
+        display: flex;
+        align-items: center;
+        white-space: pre-line;
+        overflow: scroll;
+        h2 {
+          width: 55px;
+          font-size: 16px;
+        }
+        div {
+          width: 100%;
+        }
+      }
+      .wrap-content {
+        white-space: pre-line;
+      }
+      .wrap-btn {
+        margin-top: 60px;
+        text-align: end;
+      }
+      button {
+        border: unset;
+        background: white;
+        color: $main-color;
+        font-size: 14px;
       }
     }
-    .wrap-content {
-      white-space: pre-line;
-    }
-    .wrap-btn {
-      margin-top: 60px;
-      text-align: end;
-    }
-    button {
-      border: unset;
-      background: white;
-      color: $main-color;
-      font-size: 16px;
+  }
+}
+@media (min-width: 800px) {
+  .wrap-dialog {
+    box-shadow: unset !important;
+    .wrap-card {
+      position: relative;
+      padding: 40px;
+      width: 40vw;
+      max-width: 600px;
+      min-width: 400px;
+      .wrap-close-icon {
+        text-align: end;
+      }
+      .wrap-title {
+        display: flex;
+        align-items: center;
+        white-space: pre-line;
+        overflow: scroll;
+        h2 {
+          width: 80px;
+        }
+        div {
+          width: 100%;
+        }
+      }
+      .wrap-content {
+        white-space: pre-line;
+      }
+      .wrap-btn {
+        margin-top: 60px;
+        text-align: end;
+      }
+      button {
+        border: unset;
+        background: white;
+        color: $main-color;
+        font-size: 16px;
+      }
     }
   }
 }
