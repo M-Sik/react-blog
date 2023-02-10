@@ -102,12 +102,12 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
             {diaryIndex !== null && <p>{storeDiarys[diaryIndex].createDate}</p>}
           </div>
           <div className={`${cx('wrap-title')}`}>
-            <h2 className="d-flex">제목 :</h2>
+            <h2 className={`${cx('title-width')}`}>제목 :</h2>
             <div>
               {inputsToggle ? (
                 <input type="text" value={title} onChange={handleTitle} />
               ) : (
-                <h2>{diaryIndex !== null && storeDiarys[diaryIndex].title}</h2>
+                <p>{diaryIndex !== null && storeDiarys[diaryIndex].title}</p>
               )}
             </div>
           </div>
