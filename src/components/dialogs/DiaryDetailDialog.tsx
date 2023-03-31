@@ -39,9 +39,7 @@ function diaryDetailDialog({ dialog, dialogFunc, diaryIndex, initDiaryIndex }: C
 
   const useDiary = () => {
     // zustand
-    const { storeDiarys } = diaryStore();
-    const { deleteDiary } = diaryStore();
-    const { updateDiary } = diaryStore();
+    const { storeDiarys, deleteDiary, updateDiary } = diaryStore();
     const handleUpdateDiary = () => {
       console.log(' diary index => ', diaryIndex);
       setInputsToggle(true);

@@ -1,12 +1,14 @@
-import Home from '@/pages/Home';
-import AddDiary from '@/pages/AddDiary';
-import MainLayout from '@/layouts/MainLayout';
-import Diarys from '@/pages/Diarys';
 import { useRoutes } from 'react-router-dom';
+import React from 'react';
+const Home = React.lazy(() => import('@/pages/Home'));
+const AddDiary = React.lazy(() => import('@/pages/AddDiary'));
+const MainLayout = React.lazy(() => import('@/layouts/MainLayout'));
+const Diarys = React.lazy(() => import('@/pages/Diarys'));
 
 function Router() {
   const routes = useRoutes([
     {
+      path: '/',
       element: <MainLayout />,
       children: [
         {
